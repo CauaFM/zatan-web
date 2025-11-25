@@ -1,0 +1,336 @@
+
+/* Strong overrides to ensure light-mode readability */
+:root {
+  --color-text-primary: #0b1720;
+  --color-text-secondary: #334155;
+}
+/* Force elements that used the light variable to use primary */
+* { color: inherit; }
+/* Page-specific */
+.page-areas-regras, .areas-regras, .areas-regras h1, .areas-regras h2, .areas-regras p, .areas-regras .section-title {
+  color: var(--color-text-primary) !important;
+}
+/* Translate widget */
+.translate-widget { right: 120px !important; }
+.translate-panel, .translate-note, .translate-panel .goog-te-combo { color: var(--color-text-secondary) !important; background: var(--color-bg-secondary) !important; border-color: rgba(3,7,18,0.06) !important; }
+
+
+/* EXTRA: appended color fixes for footer and Areas/Rules */
+
+/* Additional fixes (light-mode): ensure footer links and navigation buttons are visible */
+
+/* Footer area: make sure text and links are readable */
+footer, .site-footer, .footer, .footer * {
+  color: var(--color-text-secondary) !important;
+  opacity: 1 !important;
+}
+
+/* Footer links specifically */
+footer a, .site-footer a, .footer a, footer a:link, footer a:visited {
+  color: var(--color-text-secondary) !important;
+  text-decoration: none !important;
+  opacity: 1 !important;
+}
+
+/* Buttons and navigation tabs: use primary/secondary text colors to improve contrast */
+.btn, .button, .btn--primary, .btn--outline, .btn--ghost, .tab-button, .nav-tabs a, .nav a {
+  color: var(--color-text-primary) !important;
+  opacity: 1 !important;
+  background: transparent !important;
+  border-color: rgba(3,7,18,0.08) !important;
+}
+
+/* Specific fix for the "Areas and Rules" control so it doesn't appear washed out */
+.areas-regras, .areas-regras .btn, .areas-regras .btn--outline, .areas-regras-link, .areas-and-rules, .areas-and-rules .btn {
+  color: var(--color-text-primary) !important;
+  background: transparent !important;
+  opacity: 1 !important;
+  border-color: var(--color-primary) !important;
+}
+
+/* Hero/CTA buttons that appeared faded */
+.hero .btn, .cta .btn, .cta-button, .tabs .btn {
+  color: var(--color-text-primary) !important;
+  opacity: 1 !important;
+}
+
+/* Ensure Google Translate widget colors remain consistent */
+.translate-panel, .translate-note, .translate-panel .goog-te-combo {
+  color: var(--color-text-secondary) !important;
+  background: var(--color-bg-secondary) !important;
+  border-color: rgba(3,7,18,0.06) !important;
+}
+
+/* Fallback: any element using the light text variable should fallback to primary in light mode */
+:root {
+  --fallback-text-for-light: var(--color-text-primary);
+}
+*[style*="--color-text-light"], *[class*="light"], .uses-light-text {
+  color: var(--fallback-text-for-light) !important;
+}
+
+
+/* BUTTON ANIMATIONS & FOOTER COLOR - APPENDED TO OVERRIDES */
+
+/* Button hover animation: subtle lift + color shift */
+.btn, .button, button, .btn--outline, .btn--primary {
+  transition: transform 180ms var(--transition-base), box-shadow 180ms var(--transition-base), background-color 180ms var(--transition-base), color 180ms var(--transition-base);
+  will-change: transform, box-shadow;
+}
+.btn:hover, .button:hover, button:hover, .btn--outline:hover, .btn--primary:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 10px 20px rgba(3, 12, 22, 0.08);
+}
+.btn:active, .button:active, button:active {
+  transform: translateY(-1px) scale(0.995);
+  box-shadow: 0 6px 12px rgba(3, 12, 22, 0.06);
+}
+
+/* Fancy animated underline for link-like buttons */
+.btn--link, .nav a, .tab-button {
+  position: relative;
+  overflow: visible;
+}
+.btn--link::after, .nav a::after, .tab-button::after {
+  content: '';
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: -6px;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(0,168,168,0), var(--color-primary), rgba(0,168,168,0));
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 240ms ease;
+  border-radius: 2px;
+}
+.btn--link:hover::after, .nav a:hover::after, .tab-button:hover::after {
+  transform: scaleX(1);
+}
+
+/* Footer color at the very end of the page */
+.page-footer-color-end {
+  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(3, 102, 120, 0.06) 30%, var(--color-primary) 100%);
+  height: 120px;
+  width: 100%;
+}
+
+/* Sticky 'page end' band to ensure visible color block at bottom */
+.site-footer {
+  background: linear-gradient(180deg, var(--color-bg-secondary) 0%, var(--color-primary) 100%) !important;
+  color: var(--color-text-inverse) !important;
+}
+.site-footer a { color: rgba(255,255,255,0.9) !important; }
+
+
+/* FOOTER & BUTTONS & NO-UNDERLINE PATCH (overrides) */
+
+/* FOOTER: colored background and improved contrast */
+.site-footer, footer, .footer {
+  background: linear-gradient(180deg, var(--color-primary) 0%, #005766 100%) !important;
+  color: var(--color-text-inverse) !important;
+  padding: 28px 20px !important;
+  border-top: none !important;
+}
+.site-footer a, footer a, .footer a {
+  color: rgba(255,255,255,0.95) !important;
+  text-decoration: none !important;
+}
+
+/* Remove decorative underlines globally (grifação) */
+a, a:link, a:visited, a:hover, a:active, .btn--link, .nav a, .tab-button {
+  text-decoration: none !important;
+}
+
+/* Remove animated underline pseudo-elements previously added */
+.btn--link::after, .nav a::after, .tab-button::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* Button animation: subtle hover lift + outline pulse on focus */
+@keyframes btn-pop {
+  0% { transform: translateY(0) scale(1); box-shadow: 0 6px 12px rgba(3,12,22,0.06); }
+  50% { transform: translateY(-6px) scale(1.02); box-shadow: 0 16px 32px rgba(3,12,22,0.12); }
+  100% { transform: translateY(0) scale(1); box-shadow: 0 6px 12px rgba(3,12,22,0.06); }
+}
+
+.btn, .button, button, .btn--primary, .btn--outline {
+  transition: transform 200ms cubic-bezier(.2,.9,.3,1), box-shadow 200ms ease, background-color 160ms ease, color 160ms ease;
+  will-change: transform, box-shadow;
+  backface-visibility: hidden;
+}
+
+.btn:hover, .button:hover, button:hover, .btn--primary:hover, .btn--outline:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 16px 32px rgba(3,12,22,0.12);
+}
+
+.btn:focus, .button:focus, button:focus, .btn--primary:focus, .btn--outline:focus {
+  animation: btn-pop 420ms ease;
+  outline: none !important;
+  box-shadow: 0 0 0 6px rgba(3,102,120,0.12) !important;
+}
+
+/* Ensure small link-like buttons still look clickable without underlines */
+.btn--link, .nav a, .tab-button {
+  color: var(--color-primary) !important;
+  padding-bottom: 2px;
+  border-radius: 6px;
+}
+
+/* Ensure translate widget contrast in footer area */
+.translate-widget { right: 120px !important; }
+.translate-panel, .translate-note, .translate-panel .goog-te-combo {
+  color: var(--color-text-inverse) !important;
+  background: rgba(255,255,255,0.06) !important;
+  border-color: rgba(255,255,255,0.12) !important;
+}
+
+
+/* DARK FOOTER + LIGHT TITLE FIX PATCH */
+
+/* ============================
+   DARK MODE FOOTER FIX
+   ============================ */
+:root[data-theme="dark"] footer,
+:root[data-theme="dark"] .site-footer,
+:root[data-theme="dark"] .footer {
+    background: linear-gradient(180deg, #0a1b24 0%, #003949 100%) !important; /* deep ocean teal */
+    color: #E2E8F0 !important;  /* light gray-blue */
+}
+:root[data-theme="dark"] footer a,
+:root[data-theme="dark"] .site-footer a,
+:root[data-theme="dark"] .footer a {
+    color: #F1F5F9 !important;
+}
+
+/* ============================
+   LIGHT MODE TITLE FIX
+   ============================ */
+:root h1, :root h2, :root .page-title, :root .section-title {
+    color: #003243 !important; /* deep seawater teal, high contrast */
+}
+
+
+/* ZONE COLOR PATCH */
+
+/* ============================================
+   COLORAÇÃO DAS ZONAS
+   ============================================ */
+
+/* Zona REGULAR – VERDE */
+.zona-regular,
+.zona-verde,
+.zona-regular * {
+    color: #0f7a0f !important;
+    border-color: #0f7a0f !important;
+}
+
+/* Zona RESTRITA – VERMELHO */
+.zona-restrita,
+.zona-vermelha,
+.zona-restrita * {
+    color: #c1121f !important;
+    border-color: #c1121f !important;
+}
+
+/* Zona DE ATENÇÃO – AMARELO */
+.zona-atencao,
+.zona-amarela,
+.zona-atencao * {
+    color: #c9a200 !important;
+    border-color: #c9a200 !important;
+}
+
+
+/* TITLES & NAV COLOR PATCH */
+
+/* ============================================
+   TITLES & NAV COLORS (LIGHT MODE)
+   ============================================ */
+:root .nav a,
+:root .nav a:link,
+:root .nav a:visited {
+    color: #003043 !important; /* Deep teal */
+}
+
+:root h1, :root h2, :root .page-title, :root .section-title, :root .hero-title {
+    color: #002630 !important; /* Strong contrast teal */
+}
+
+/* ============================================
+   TITLES & NAV COLORS (DARK MODE)
+   ============================================ */
+:root[data-theme="dark"] .nav a,
+:root[data-theme="dark"] .nav a:link,
+:root[data-theme="dark"] .nav a:visited {
+    color: #8BD8F8 !important; /* light cyan-blue */
+}
+
+:root[data-theme="dark"] h1,
+:root[data-theme="dark"] h2,
+:root[data-theme="dark"] .page-title,
+:root[data-theme="dark"] .section-title,
+:root[data-theme="dark"] .hero-title {
+    color: #DFF7FF !important; /* very light turquoise */
+}
+
+/* Active navigation item for both modes */
+.nav a.active {
+    color: #ffffff !important;
+}
+
+
+/* TITLE ANIMATION + PALETTE PATCH */
+
+/* ============================
+   TITLE ANIMATION ON SCROLL
+   ============================ */
+@keyframes titleFadeInUp {
+  0% { opacity: 0; transform: translateY(18px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+h1, h2, .page-title, .section-title, .hero-title {
+  opacity: 0;
+  animation: titleFadeInUp 0.8s ease forwards;
+  animation-delay: 0.1s;
+}
+
+/* Add slight stagger effect */
+.section-title:nth-of-type(1) { animation-delay: 0.1s; }
+.section-title:nth-of-type(2) { animation-delay: 0.18s; }
+.section-title:nth-of-type(3) { animation-delay: 0.25s; }
+
+/* ============================
+   GLOBAL COLOR PALETTE
+   ============================ */
+:root {
+  --palette-deep-teal: #003043;
+  --palette-sea-teal: #007B9E;
+  --palette-soft-teal: #4CC9F0;
+  --palette-white-soft: #F8FAFC;
+  --palette-dark-ocean: #0A1B24;
+}
+
+/* Unified titles using palette */
+:root h1, :root h2, :root .page-title, :root .section-title {
+  color: var(--palette-deep-teal) !important;
+}
+
+:root[data-theme="dark"] h1,
+:root[data-theme="dark"] h2,
+:root[data-theme="dark"] .page-title,
+:root[data-theme="dark"] .section-title {
+  color: var(--palette-soft-teal) !important;
+}
+
+/* Navigation palette harmonized */
+:root .nav a { color: var(--palette-deep-teal) !important; }
+:root[data-theme="dark"] .nav a { color: var(--palette-soft-teal) !important; }
+
+/* Accent color on hover */
+.nav a:hover, .btn:hover {
+  color: var(--palette-sea-teal) !important;
+}

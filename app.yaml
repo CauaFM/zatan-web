@@ -1,0 +1,38 @@
+runtime: python311
+
+env: standard
+
+# Configurações de instância
+instance_class: F1  # Use F2 ou F4 para mais recursos
+automatic_scaling:
+  min_instances: 1
+  max_instances: 10
+  target_cpu_utilization: 0.6
+
+# Variáveis de ambiente
+env_variables:
+  FLASK_DEBUG: 'False'
+  SECRET_KEY: 'GERE_UMA_CHAVE_SECRETA_SEGURA_AQUI'
+  # Para usar Cloud SQL no futuro, descomente e configure:
+  # DATABASE_URL: 'mysql+pymysql://user:password@/dbname?unix_socket=/cloudsql/PROJECT_ID:REGION:INSTANCE_NAME'
+
+# Handlers para arquivos estáticos (opcional, o Flask pode servir)
+handlers:
+  # Servir arquivos estáticos diretamente pelo App Engine (mais eficiente)
+  - url: /assets
+    static_dir: assets
+    expiration: 1d
+    
+  # Todos os outros requests vão para o app Python
+  - url: /.*
+    script: auto
+
+# Recursos
+resources:
+  cpu: 1
+  memory_gb: 0.5
+  disk_size_gb: 10
+
+# Health check será feito automaticamente pelo App Engine
+# O endpoint /api/health está disponível para monitoramento
+

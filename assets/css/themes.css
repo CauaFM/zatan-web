@@ -1,0 +1,291 @@
+
+/* ============================================
+   ZATAN - Theme Variables
+   Paleta inspirada em mar e litoral + modos de contraste
+   ============================================ */
+
+/* Tema padrão (claro) */
+:root {
+  /* Escala tipográfica base (podem ser ajustadas via JS) */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.5rem;
+  --font-size-2xl: 2rem;
+  --font-size-3xl: 2.5rem;
+
+  /* Espaçamentos */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-xxl: 3rem;
+
+  /* Cores Principais - Mar e Litoral (tema claro) */
+  --color-primary: #00A8A8;        /* Turquesa */
+  --color-primary-dark: #008B8B;   /* Turquesa escuro */
+  --color-primary-light: #4ECDC4;  /* Turquesa claro */
+
+  --color-secondary: #1E88E5;       /* Azul médio */
+  --color-secondary-dark: #1565C0;  /* Azul escuro */
+  --color-secondary-light: #64B5F6; /* Azul claro */
+
+  /* Fundo e texto */
+  --color-bg-primary: #F5F7FA;
+  --color-bg-secondary: #FFFFFF;
+  --color-bg-dark: #101522;
+
+  --color-bg-gradient-start: #007B9E;
+  --color-bg-gradient-end: #00A8A8;
+
+  --color-text-primary: #0b1720;
+  --color-text-secondary: #334155;
+  --color-text-muted: #6B7280;
+  --color-text-light: #f8fafc;/* adjusted for light mode to avoid invisible text */
+
+  /* Feedback */
+  --color-success: #16A34A;
+  --color-error: #DC2626;
+  --color-info: #0EA5E9;
+
+  /* Bordas e raios */
+  --border-radius-md: 0.5rem;
+  --border-radius-lg: 1rem;
+  --border-radius-full: 999px;
+
+  /* Sombras */
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 4px 6px rgba(15, 23, 42, 0.12);
+  --shadow-lg: 0 10px 15px rgba(15, 23, 42, 0.18);
+  --shadow-xl: 0 20px 25px rgba(15, 23, 42, 0.2);
+
+  /* Transições */
+  --transition-base: 0.2s ease;
+  --transition-fast: 0.15s ease-out;
+
+  /* Z-index */
+  --z-header: 1000;
+  --z-modal: 1200;
+  --z-floating: 1300;
+}
+
+/* Tema escuro colorido */
+:root[data-theme="dark"] {
+  --color-bg-primary: #020617;
+  --color-bg-secondary: #020617;
+  --color-bg-dark: #000000;
+
+  --color-bg-gradient-start: #020617;
+  --color-bg-gradient-end: #0f172a;
+
+  --color-text-primary: #E5E7EB;
+  --color-text-secondary: #CBD5F5;
+  --color-text-muted: #9CA3AF;
+  --color-text-light: #F9FAFB;
+
+  --color-primary: #22D3EE;
+  --color-primary-dark: #0891B2;
+  --color-primary-light: #67E8F9;
+
+  --color-secondary: #38BDF8;
+  --color-secondary-dark: #0EA5E9;
+  --color-secondary-light: #7DD3FC;
+
+  --shadow-md: 0 10px 15px rgba(15, 23, 42, 0.7);
+}
+
+/* Tema de alto contraste em preto e branco */
+:root[data-theme="high-contrast"] {
+  /* Fundo e texto em preto/branco */
+  --color-bg-primary: #000000;
+  --color-bg-secondary: #000000;
+  --color-bg-dark: #000000;
+
+  --color-bg-gradient-start: #000000;
+  --color-bg-gradient-end: #000000;
+
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #FFFFFF;
+  --color-text-muted: #E5E5E5;
+  --color-text-light: #FFFFFF;
+
+  /* Remover cores fortes: tudo em tons de cinza */
+  --color-primary: #FFFFFF;
+  --color-primary-dark: #E5E5E5;
+  --color-primary-light: #FFFFFF;
+
+  --color-secondary: #FFFFFF;
+  --color-secondary-dark: #CCCCCC;
+  --color-secondary-light: #F5F5F5;
+
+  --color-success: #FFFFFF;
+  --color-error: #FFFFFF;
+  --color-info: #FFFFFF;
+
+  --shadow-sm: 0 0 0 1px #FFFFFF;
+  --shadow-md: 0 0 0 2px #FFFFFF;
+  --shadow-lg: 0 0 0 3px #FFFFFF;
+  --shadow-xl: 0 0 0 4px #FFFFFF;
+}
+
+/* Preferência do sistema (fallback quando usuário ainda não escolheu) */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --color-bg-primary: #020617;
+    --color-bg-secondary: #020617;
+    --color-text-primary: #E5E7EB;
+    --color-text-secondary: #CBD5F5;
+    --color-text-muted: #9CA3AF;
+    --color-text-light: #F9FAFB;
+  }
+}
+
+
+/* DARK FOOTER + LIGHT TITLE FIX PATCH */
+
+/* ============================
+   DARK MODE FOOTER FIX
+   ============================ */
+:root[data-theme="dark"] footer,
+:root[data-theme="dark"] .site-footer,
+:root[data-theme="dark"] .footer {
+    background: linear-gradient(180deg, #0a1b24 0%, #003949 100%) !important; /* deep ocean teal */
+    color: #E2E8F0 !important;  /* light gray-blue */
+}
+:root[data-theme="dark"] footer a,
+:root[data-theme="dark"] .site-footer a,
+:root[data-theme="dark"] .footer a {
+    color: #F1F5F9 !important;
+}
+
+/* ============================
+   LIGHT MODE TITLE FIX
+   ============================ */
+:root h1, :root h2, :root .page-title, :root .section-title {
+    color: #003243 !important; /* deep seawater teal, high contrast */
+}
+
+
+/* ZONE COLOR PATCH */
+
+/* ============================================
+   COLORAÇÃO DAS ZONAS
+   ============================================ */
+
+/* Zona REGULAR – VERDE */
+.zona-regular,
+.zona-verde,
+.zona-regular * {
+    color: #0f7a0f !important;
+    border-color: #0f7a0f !important;
+}
+
+/* Zona RESTRITA – VERMELHO */
+.zona-restrita,
+.zona-vermelha,
+.zona-restrita * {
+    color: #c1121f !important;
+    border-color: #c1121f !important;
+}
+
+/* Zona DE ATENÇÃO – AMARELO */
+.zona-atencao,
+.zona-amarela,
+.zona-atencao * {
+    color: #c9a200 !important;
+    border-color: #c9a200 !important;
+}
+
+
+/* TITLES & NAV COLOR PATCH */
+
+/* ============================================
+   TITLES & NAV COLORS (LIGHT MODE)
+   ============================================ */
+:root .nav a,
+:root .nav a:link,
+:root .nav a:visited {
+    color: #003043 !important; /* Deep teal */
+}
+
+:root h1, :root h2, :root .page-title, :root .section-title, :root .hero-title {
+    color: #002630 !important; /* Strong contrast teal */
+}
+
+/* ============================================
+   TITLES & NAV COLORS (DARK MODE)
+   ============================================ */
+:root[data-theme="dark"] .nav a,
+:root[data-theme="dark"] .nav a:link,
+:root[data-theme="dark"] .nav a:visited {
+    color: #8BD8F8 !important; /* light cyan-blue */
+}
+
+:root[data-theme="dark"] h1,
+:root[data-theme="dark"] h2,
+:root[data-theme="dark"] .page-title,
+:root[data-theme="dark"] .section-title,
+:root[data-theme="dark"] .hero-title {
+    color: #DFF7FF !important; /* very light turquoise */
+}
+
+/* Active navigation item for both modes */
+.nav a.active {
+    color: #ffffff !important;
+}
+
+
+/* TITLE ANIMATION + PALETTE PATCH */
+
+/* ============================
+   TITLE ANIMATION ON SCROLL
+   ============================ */
+@keyframes titleFadeInUp {
+  0% { opacity: 0; transform: translateY(18px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+h1, h2, .page-title, .section-title, .hero-title {
+  opacity: 0;
+  animation: titleFadeInUp 0.8s ease forwards;
+  animation-delay: 0.1s;
+}
+
+/* Add slight stagger effect */
+.section-title:nth-of-type(1) { animation-delay: 0.1s; }
+.section-title:nth-of-type(2) { animation-delay: 0.18s; }
+.section-title:nth-of-type(3) { animation-delay: 0.25s; }
+
+/* ============================
+   GLOBAL COLOR PALETTE
+   ============================ */
+:root {
+  --palette-deep-teal: #003043;
+  --palette-sea-teal: #007B9E;
+  --palette-soft-teal: #4CC9F0;
+  --palette-white-soft: #F8FAFC;
+  --palette-dark-ocean: #0A1B24;
+}
+
+/* Unified titles using palette */
+:root h1, :root h2, :root .page-title, :root .section-title {
+  color: var(--palette-deep-teal) !important;
+}
+
+:root[data-theme="dark"] h1,
+:root[data-theme="dark"] h2,
+:root[data-theme="dark"] .page-title,
+:root[data-theme="dark"] .section-title {
+  color: var(--palette-soft-teal) !important;
+}
+
+/* Navigation palette harmonized */
+:root .nav a { color: var(--palette-deep-teal) !important; }
+:root[data-theme="dark"] .nav a { color: var(--palette-soft-teal) !important; }
+
+/* Accent color on hover */
+.nav a:hover, .btn:hover {
+  color: var(--palette-sea-teal) !important;
+}

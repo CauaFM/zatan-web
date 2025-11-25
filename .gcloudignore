@@ -1,0 +1,66 @@
+# Arquivos e pastas que não devem ser enviados para o Google Cloud
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtualenv
+venv/
+env/
+ENV/
+.venv
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Git
+.git/
+.gitignore
+
+# Banco de dados local
+*.db
+*.sqlite
+*.sqlite3
+backend/zatan.db
+
+# Logs
+*.log
+logs/
+
+# Arquivos de desenvolvimento
+.DS_Store
+Thumbs.db
+
+# Documentação (opcional - descomente se não quiser enviar)
+# *.md
+# README.md
+# INSTRUCOES.md
+# RESUMO.md
+
+# Arquivos temporários
+*.tmp
+*.temp
+/tmp/
+
