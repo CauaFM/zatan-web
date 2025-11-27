@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🚀 Guia de Deploy para Google Cloud Platform
 
 Este guia explica como fazer o deploy do projeto ZATAN no Google Cloud Platform usando App Engine.
@@ -298,4 +299,138 @@ Para domínio personalizado, configure no [Console do App Engine](https://consol
 ---
 
 **Desenvolvido para ZATAN - Zoneamento Ambiental e Territorial das Atividades Náuticas**
+=======
+# 🚀 Guia de Deploy no Render
+
+Este guia mostra como colocar o projeto ZATAN em produção usando o **Render** (serviço PaaS com suporte nativo a Python).
+
+---
+
+## 📋 Pré-requisitos
+
+1. Conta no [Render](https://render.com/)
+2. Código versionado em GitHub, GitLab ou Bitbucket
+3. Python 3.11 instalado localmente (para testes)
+4. Opcional: banco Postgres criado no Render ou um Render Disk para usar SQLite
+
+---
+
+## 🧪 Testar localmente antes do deploy
+
+```bash
+python -m venv .venv
+.venv\Scripts\activate  # Windows
+pip install -r requirements.txt
+python main.py
+```
+
+Acesse `http://localhost:5000` e confira se:
+- O site carrega (arquivos HTML/CSS/JS servidos pelo Flask)
+- `http://localhost:5000/api/health` retorna status `online`
+
+---
+
+## ⚙️ Como o Render vai executar o projeto
+
+- `render.yaml` define o serviço
+- `Procfile` fornece o comando `web: gunicorn wsgi:app`
+- `wsgi.py` expõe o app Flask
+- As dependências estão em `requirements.txt`
+
+Você pode:
+- **(Recomendado)** Manter o `render.yaml` na raiz e deixar o Render detectá-lo automaticamente.
+- Ou criar o serviço manualmente no dashboard usando os mesmos comandos.
+
+---
+
+## 🌐 Criando o Web Service no Render
+
+1. Faça login em `https://dashboard.render.com`
+2. Clique em **New +** → **Web Service**
+3. Conecte o repositório onde está o projeto
+4. Ajuste as opções:
+   - **Name:** `zatan-backend` (ou outro)
+   - **Region:** escolha a mais próxima do público (ex.: Oregon/EUA)
+   - **Branch:** `main` (ou a que preferir)
+   - **Runtime:** Python 3
+   - **Build Command:** `pip install -r requirements.txt`
+   - **Start Command:** `gunicorn wsgi:app`
+5. Clique em **Create Web Service**
+
+Se preferir usar o `render.yaml`, adicione o repositório via **Blueprint** e o Render criará o serviço com as definições do arquivo.
+
+---
+
+## 🔑 Variáveis de ambiente
+
+No dashboard, vá em **Environment** → **Add Environment Variable** e configure:
+
+| Variável | Obrigatório? | Exemplo | Observação |
+| --- | --- | --- | --- |
+| `SECRET_KEY` | ✅ | `python -c "import secrets; print(secrets.token_hex(32))"` | Necessário para cookies/sessões seguras |
+| `CORS_ORIGINS` | Opcional | `https://seusite.com,https://www.seusite.com` | Use se quiser restringir origens |
+| `DATABASE_URL` | Opcional | (Render gera automaticamente ao criar um Postgres) | Sem Postgres, o app usa SQLite |
+| `MAIL_*` | Opcional | Depende do servidor de email | Já suportado em `backend/config.py` |
+
+> **Dica**: se for usar SQLite em produção, adicione um **Render Disk** (mínimo 1GB) e monte em `/var/data`. O app detecta `RENDER_PERSISTENT_DIR` e cria `zatan.db` dentro dele.
+
+---
+
+## 🗄️ Banco de dados
+
+### Opção 1 – Postgres (recomendado)
+1. Em **New +** → **PostgreSQL**
+2. Após criar, copie a `Internal Database URL`
+3. Cole em `DATABASE_URL` do Web Service
+
+### Opção 2 – SQLite com Render Disk
+1. Dentro do Web Service, vá em **Disks** → **Add Disk**
+2. Ex: nome `zatan-data`, tamanho `1GB`, mount path `/var/data`
+3. Deploy novamente. O app criará `/var/data/zatan.db` automaticamente
+
+---
+
+## ✅ Checklist pós-deploy
+
+- [ ] Build terminou sem erros
+- [ ] Variáveis de ambiente configuradas
+- [ ] Disk ou banco configurado (se precisar persistir dados)
+- [ ] Endpoint `https://<service>.onrender.com/api/health` retorna `online`
+- [ ] Logs em **Events** sem erros
+
+---
+
+## 🧰 Operações úteis
+
+| Ação | Onde/Como |
+| --- | --- |
+| Ver logs em tempo real | Aba **Logs** do serviço |
+| Re-deploy manual | Botão **Manual Deploy** → **Deploy latest commit** |
+| Trocar branch | **Settings** → **General** → `Branch` |
+| Atualizar variáveis | **Environment** → editar e salvar |
+| Escalar plano | **Settings** → **Scaling** |
+
+---
+
+## 🐛 Troubleshooting
+
+- **Build falhou em `pip install`**: verifique o Python 3.11 e dependências no `requirements.txt`.
+- **Erro `ModuleNotFoundError` ao subir**: confirme que o serviço está rodando na raiz do projeto (onde há `wsgi.py`).
+- **Health check 404**: certifique-se de acessar `/api/health`.
+- **Banco não persiste**: configure `DATABASE_URL` (Postgres) ou um Render Disk para SQLite.
+- **CORS bloqueando requisições**: defina `CORS_ORIGINS` com o domínio final.
+
+---
+
+## 📚 Referências
+
+- [Documentação do Render](https://render.com/docs)
+- [Blueprint Specification (`render.yaml`)](https://render.com/docs/blueprint-spec)
+- [Gunicorn](https://docs.gunicorn.org/en/stable/)
+- [Flask Deployment Options](https://flask.palletsprojects.com/en/3.0.x/deploying/)
+
+---
+
+Pronto! Depois de seguir estes passos o projeto estará disponível em `https://<nome-do-servico>.onrender.com` ou em seu domínio customizado.
+>>>>>>> def128b (atualização)
 

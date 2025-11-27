@@ -2,8 +2,13 @@
 Rotas para o sistema de quiz
 """
 from flask import Blueprint, request, jsonify
+<<<<<<< HEAD
 from database import db
 from models import QuizResult
+=======
+from ..database import db
+from ..models import QuizResult
+>>>>>>> def128b (atualização)
 import json
 
 quiz_bp = Blueprint('quiz', __name__, url_prefix='/api/quiz')

@@ -2,8 +2,13 @@
 Rotas para formulário de contato/feedback
 """
 from flask import Blueprint, request, jsonify
+<<<<<<< HEAD
 from database import db
 from models import Contact
+=======
+from ..database import db
+from ..models import Contact
+>>>>>>> def128b (atualização)
 from datetime import datetime
 import re
 

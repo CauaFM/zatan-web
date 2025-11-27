@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # ✅ PROJETO PRONTO PARA GOOGLE CLOUD
 
 ## 🎉 O que foi feito
@@ -184,3 +185,64 @@ Seu projeto está **100% preparado** para o Google Cloud. Basta seguir os passos
 
 **Boa sorte com o deploy! 🚀**
 
+=======
+# ✅ PROJETO PRONTO PARA O RENDER
+
+## 🎉 O que foi feito
+
+Atualizamos toda a configuração para que você apenas conecte o repositório ao Render e clique em deploy.
+
+### 📦 Arquivos importantes
+
+1. `wsgi.py` – expõe o app Flask para o Gunicorn/Render.
+2. `Procfile` – comando `web: gunicorn wsgi:app`.
+3. `render.yaml` – blueprint opcional (o Render lê e cria o serviço automaticamente).
+4. `RENDER_SETUP.md` – resumo técnico.
+5. `DEPLOY.md` – passo a passo completo para o Render.
+
+### 🔧 Ajustes no código
+
+- Imports internos agora são relativos (`backend/...`) para rodar como pacote.
+- `backend/config.py` entende variáveis padrão do Render (`RENDER_EXTERNAL_URL`, `RENDER_PERSISTENT_DIR`, `DATABASE_URL`).
+- Removidos arquivos exclusivos do Google Cloud (`app.yaml`, `.gcloudignore`, etc.).
+- `main.py` continua como atalho para rodar localmente.
+
+## 🚀 Como fazer o deploy (resumo)
+
+1. **Testar localmente**
+   ```bash
+   python -m venv .venv
+   .venv\Scripts\activate
+   pip install -r requirements.txt
+   python main.py
+   ```
+2. **Configurar variáveis no Render**
+   - `SECRET_KEY` (obrigatória)
+   - `DATABASE_URL` (se usar Postgres) **ou** adicionar um Render Disk para SQLite
+   - `CORS_ORIGINS` se quiser restringir domínios
+3. **Criar o Web Service**
+   - Build: `pip install -r requirements.txt`
+   - Start: `gunicorn wsgi:app`
+   - Python Version: 3.11
+4. **Confirmar health check** em `https://<service>.onrender.com/api/health`
+
+Para detalhes, siga o `DEPLOY.md`.
+
+## 📋 Checklist rápido
+
+- [ ] Commit com os arquivos novos (`Procfile`, `render.yaml`, etc.)
+- [ ] `SECRET_KEY` definida nas variáveis do Render
+- [ ] Banco configurado (Postgres ou Disk)
+- [ ] Deploy criado e build concluído
+- [ ] Health check respondendo `online`
+
+## 📚 Documentação complementar
+
+- `DEPLOY.md` – guia completo
+- `RENDER_SETUP.md` – resumo do que mudou
+- `backend/README.md` – endpoints e modelos
+
+---
+
+Pronto! Agora o projeto está 100% preparado para o Render. É só ligar o repositório, ajustar as variáveis e publicar. 🚀
+>>>>>>> def128b (atualização)

@@ -2,8 +2,13 @@
 Rotas para zonas do ZATAN
 """
 from flask import Blueprint, request, jsonify
+<<<<<<< HEAD
 from database import db
 from models import Zone
+=======
+from ..database import db
+from ..models import Zone
+>>>>>>> def128b (atualização)
 from datetime import datetime
 
 zones_bp = Blueprint('zones', __name__, url_prefix='/api/zones')

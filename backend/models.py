@@ -2,7 +2,11 @@
 Modelos de dados do ZATAN
 """
 from datetime import datetime
+<<<<<<< HEAD
 from database import db
+=======
+from .database import db
+>>>>>>> def128b (atualização)
 
 
 class Contact(db.Model):
