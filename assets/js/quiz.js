@@ -296,18 +296,6 @@ function showResults() {
   if (progressBar) {
     progressBar.style.width = '100%';
   }
-
-  // Salvar resultado na API se disponível
-  if (window.ZATAN_API && window.ZATAN_API.saveQuizResult) {
-    window.ZATAN_API.saveQuizResult({
-      score: score,
-      total_questions: quizQuestions.length,
-      percentage: percentage,
-      answers: userAnswers
-    }).catch(error => {
-      console.log('Resultado não foi salvo (API offline ou erro):', error);
-    });
-  }
 }
 
 function restartQuiz() {

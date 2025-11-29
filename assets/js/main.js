@@ -57,42 +57,16 @@ function initFormValidation() {
   const forms = document.querySelectorAll('.form');
   
   forms.forEach(form => {
-    form.addEventListener('submit', async (e) => {
+    form.addEventListener('submit', (e) => {
       e.preventDefault();
       
       const formData = new FormData(form);
       const errors = validateForm(form);
       
       if (errors.length === 0) {
-        // Verificar se é formulário de contato
-        if (form.id === 'contact-form' && window.ZATAN_API) {
-          // Enviar para API
-          const submitButton = form.querySelector('button[type="submit"]');
-          const originalText = submitButton ? submitButton.textContent : '';
-          
-          if (submitButton) {
-            submitButton.disabled = true;
-            submitButton.textContent = 'Enviando...';
-          }
-          
-          const result = await window.ZATAN_API.submitContact(formData);
-          
-          if (result.success) {
-            showFormSuccess(form, result.message);
-            form.reset();
-          } else {
-            showFormError(form, result.message);
-          }
-          
-          if (submitButton) {
-            submitButton.disabled = false;
-            submitButton.textContent = originalText;
-          }
-        } else {
-          // Fallback para simulação (se API não estiver disponível)
-          showFormSuccess(form);
-          form.reset();
-        }
+        // Simular envio (sem backend)
+        showFormSuccess(form);
+        form.reset();
       } else {
         showFormErrors(form, errors);
       }
@@ -174,38 +148,18 @@ function showFormErrors(form, errors) {
   });
 }
 
-function showFormSuccess(form, message = null) {
+function showFormSuccess(form) {
   const successElement = form.querySelector('.form__success');
-  const defaultMessage = 'Mensagem enviada com sucesso! Obrigado pelo seu feedback.';
-  
   if (successElement) {
     successElement.classList.add('active');
-    successElement.textContent = message || defaultMessage;
-    successElement.style.color = 'var(--color-success, #43A047)';
+    successElement.textContent = 'Mensagem enviada com sucesso! Obrigado pelo seu feedback.';
     
     // Esconder após 5 segundos
     setTimeout(() => {
       successElement.classList.remove('active');
     }, 5000);
   } else {
-    alert(message || defaultMessage);
-  }
-}
-
-function showFormError(form, message) {
-  const successElement = form.querySelector('.form__success');
-  
-  if (successElement) {
-    successElement.classList.add('active');
-    successElement.textContent = message || 'Erro ao enviar mensagem. Tente novamente.';
-    successElement.style.color = 'var(--color-error, #E53935)';
-    
-    // Esconder após 5 segundos
-    setTimeout(() => {
-      successElement.classList.remove('active');
-    }, 5000);
-  } else {
-    alert(message || 'Erro ao enviar mensagem. Tente novamente.');
+    alert('Mensagem enviada com sucesso! Obrigado pelo seu feedback.');
   }
 }
 

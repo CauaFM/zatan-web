@@ -27,6 +27,8 @@
 
 <body>
 
+
+
   <a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
 
 
@@ -119,42 +121,29 @@
 
         <h1 class="section__title">Mapa Interativo ZATAN</h1>
 
+        <body><link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<div id="map" style="height:500px;"></div>
+<script>
+var map=L.map('map').setView([-15, -38],6);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+var geo={
+"type":"FeatureCollection","features":[
+{"type":"Feature","properties":{"zona":"restrito"},"geometry":{"type":"Polygon","coordinates":[[[-38,-14],[-37,-14],[-37,-15],[-38,-15],[-38,-14]]]}},
+{"type":"Feature","properties":{"zona":"regular"},"geometry":{"type":"Polygon","coordinates":[[[-39,-15],[-38,-15],[-38,-16],[-39,-16],[-39,-15]]]}},
+{"type":"Feature","properties":{"zona":"liberal"},"geometry":{"type":"Polygon","coordinates":[[[-37,-16],[-36,-16],[-36,-17],[-37,-17],[-37,-16]]]}}
+]};
+function color(z){return z=="restrito"?"red":z=="regular"?"yellow":"green";}
+L.geoJSON(geo, {style:f=>({color:color(f.properties.zona)})}).addTo(map);
+</script></body>
+
         <p class="section__subtitle">
 
           Visualize as diferentes zonas de zoneamento do litoral sul de Pernambuco. 
 
           Clique nas zonas no mapa ou nos cards para mais detalhes.
 
-        </p>
-
-
-
-        <!-- Mapa Container -->
-
-        <div class="map-container">
-
-          <div class="map-placeholder">
-
-            <p style="font-size: 1.25rem; margin-bottom: 1rem; color: var(--color-text-secondary);">
-
-              Mapa Interativo ZATAN em carregamento.
-
-            </p>
-
-            <p style="color: var(--color-text-muted);">
-
-              Por favor, aguarde.
-
-            </p>
-
-            <p style="margin-top: 2rem; font-size: 0.875rem; color: var(--color-text-muted);">
-
-              <!-- Espaço preparado para integração futura com biblioteca de mapas (ex: Leaflet, Google Maps, Mapbox) -->
-
-              <!-- O mapa será georreferenciado e mostrará as zonas Restrita, Regulada e Liberal -->
-
-            </p>
-
+  
           </div>
 
         </div>
